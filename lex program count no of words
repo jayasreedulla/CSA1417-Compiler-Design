@@ -1,0 +1,23 @@
+%{
+#include <stdio.h>
+int i = 0;
+%}
+
+%%
+[a-zA-Z0-9]+     { i++; }     /* match each word */
+\n              { printf("Number of words = %d\n", i); i = 0; }
+[ \t]+          ;            /* ignore spaces and tabs */
+.               ;
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter the sentence: ");
+    yylex();
+    return 0;
+}

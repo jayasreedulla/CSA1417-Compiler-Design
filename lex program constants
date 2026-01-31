@@ -1,0 +1,23 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+[0-9]+\.[0-9]+        { printf("%s -> Float\n", yytext); }
+[0-9]+               { printf("%s -> Integer\n", yytext); }
+[A-Za-z_][A-Za-z0-9_]* { printf("%s -> Identifier\n", yytext); }
+[ \t\n]+             ;
+.                    { printf("%s -> Invalid\n", yytext); }
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter input:\n");
+    yylex();
+    return 0;
+}

@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    char op, arg1[10], arg2[10], result[10];
+
+    printf("Enter Three Address Code (Ctrl+Z to end):\n");
+
+    /*
+       Input format:
+       result = arg1 op arg2
+       Example:
+       t1 = a + b
+    */
+
+    while(scanf("%s = %s %c %s", result, arg1, &op, arg2) != EOF)
+    {
+        printf("\nGenerated Assembly Code:\n");
+
+        printf("MOV R0, %s\n", arg1);
+
+        switch(op)
+        {
+            case '+': printf("ADD R0, %s\n", arg2); break;
+            case '-': printf("SUB R0, %s\n", arg2); break;
+            case '*': printf("MUL R0, %s\n", arg2); break;
+            case '/': printf("DIV R0, %s\n", arg2); break;
+        }
+
+        printf("MOV %s, R0\n", result);
+    }
+
+    return 0;
+}

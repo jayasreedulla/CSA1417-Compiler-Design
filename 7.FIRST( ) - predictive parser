@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+
+char prod[10][20];
+char first[10][20];
+int n;
+
+int isNonTerminal(char c)
+{
+    return (c >= 'A' && c <= 'Z');
+}
+
+void addFirst(int i, char c)
+{
+    int k;
+    for(k = 0; first[i][k] != '\0'; k++)
+        if(first[i][k] == c)
+            return;
+
+    first[i][k] = c;
+    first[i][k+1] = '\0';
+}
+
+void findFirst(int i)
+{
+    char *rhs = strchr(prod[i], '>') + 1;
+
+    // Handle alternatives using /
+    char temp[20];
+    strcpy(temp, rhs);
+
+    char *token = strtok(temp, "/");
+
+    while(token != NULL)
+    {
+        char sym = token[0];
+
+        if(sym == '@')   // epsilon
+        {
+            addFirst(i, '@');
+        }
+        else if(!isNonTerminal(sym))
+        {
+            addFirst(i, sym);
+        }
+        else
+        {
+            for(int j = 0; j < n

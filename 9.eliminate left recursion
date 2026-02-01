@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    char A, alpha[20], beta[20];
+
+    printf("Enter production with left recursion (Example: L->L,S|S)\n");
+    scanf("%c->%[^|]|%s", &A, alpha, beta);
+
+    // alpha contains L,S
+    // beta contains S
+
+    printf("\nAfter eliminating left recursion:\n");
+
+    printf("%c -> %s%c'\n", A, beta, A);
+    printf("%c' -> %s%c' | @\n", A, alpha+2, A);
+
+    return 0;
+}
